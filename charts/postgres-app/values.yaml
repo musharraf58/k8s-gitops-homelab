@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: postgres
+  tag: "16"
+  pullPolicy: IfNotPresent
+
+database:
+  name: homelab
+  user: admin
+
+service:
+  port: 5432
+
+storage:
+  size: 1Gi
+  storageClass: local-path
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi

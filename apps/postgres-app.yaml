@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/musharraf58/k8s-gitops-homelab.git
+    targetRevision: HEAD
+    path: charts/postgres-app
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
